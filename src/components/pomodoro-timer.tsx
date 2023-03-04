@@ -44,7 +44,7 @@ export function PomodoroTimer(props: Props) {
       <div className="controls">
         <Button text="Iniciar" onClick={() => configureWork()} />
         <Button text="Reset" onClick={() => console.log('reset')} />
-        <Button text="Pausar" onClick={() => pauseWork()} />
+        <Button text="Pausar" onClick={() => setTimeCounting(!timeCounting)} />
       </div>
       <div className="details">
         <p>Testando: asldçaksdjçaksj çaksdjçksa djçkas</p>
