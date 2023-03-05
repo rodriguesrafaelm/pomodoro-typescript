@@ -76,17 +76,7 @@ export function PomodoroTimer(props: Props) {
       setNumberOfPomodoros(numberOfPomodoros + 1);
     }
     if (resting) configureWork();
-  }, [
-    working,
-    resting,
-    mainTime,
-    cyclesQtdManager,
-    numberOfPomodoros,
-    configureRest,
-    setCyclesQtdManager,
-    configureWork,
-    props.cycles,
-  ]);
+  }, [working, resting, mainTime]);
 
   return (
     <div className="pomodoro">
