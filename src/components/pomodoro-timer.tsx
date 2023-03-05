@@ -28,12 +28,13 @@ export function PomodoroTimer(props: Props) {
   );
 
   const [completedCycles, setCompletedCycles] = React.useState(0);
-  const [fullWorkingTime] = React.useState(0);
+  const [fullWorkingTime, setFullWorkingTime] = React.useState(0);
   const [numberOfPomodoros, setNumberOfPomodoros] = React.useState(0);
 
   useInterval(
     () => {
       setMainTime(mainTime - 1);
+      if (working) setFullWorkingTime(fullWorkingTime + 1);
     },
     timeCounting ? 1000 : null,
   );
@@ -98,7 +99,7 @@ export function PomodoroTimer(props: Props) {
       </div>
       <div className="details">
         <p>Ciclos Completos: {completedCycles}</p>
-        <p>Horas Trabalhadas: {secondsToTime(fullWorkingTime)} </p>
+        <p>Horas de trabalho: {secondsToTime(fullWorkingTime)} </p>
         <p>Pomodoros concluidos: {numberOfPomodoros}</p>
       </div>
     </div>
