@@ -50,12 +50,22 @@ body {
 
 .pomodoro button {
   background: #41e2ba;
-  border: none;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
   cursor: pointer;
   padding: 10px 4vw;
   color: #000;
   transition: background-color 300ms ease-in-out;
   margin: 20px auto;
+  font-size: 22px;
+  width: 170px;
+  height: 50px;
+
+
+}
+
+.pomodoro button:hover {
+  background: #0ecc9c;
 }
 
 .pomodoro .details {
@@ -65,4 +75,14 @@ body {
 .working .pomodoro button {
   background: #ef5d50;
   color: #fff
+}
+
+.working .pomodoro button:hover {
+  background: #f1776c;
+  color: #fff
+}
+
+.pause-message{
+  color: green;
+  height: 3vh;
 }
