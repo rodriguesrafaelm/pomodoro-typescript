@@ -6,5 +6,5 @@ interface Props {
 }
 
 export function Timer(props: Props) {
-  return <div className="timer">{secondsToTime(props.mainTimer)}</div>;
+  return <div className="timer">{secondsToTime(props.mainTimer, 'HMS')}</div>;
 }
