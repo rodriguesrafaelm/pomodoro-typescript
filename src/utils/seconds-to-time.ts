@@ -1,11 +1,14 @@
 export function secondsToTime(totalSeconds: number, pattern: string): string {
+  function addZeroLeft(value: number): string {
+    return value.toString().padStart(2, '0');
+  }
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  const formatedHours = hours ? hours.toString().padStart(2, '0') + 'h ' : '';
-  const formatedMins = minutes.toString().padStart(2, '0') + 'm ';
-  const formatedSeconds = (seconds % 60).toString().padStart(2, '0') + 's ';
+  const formatedHours = hours ? addZeroLeft(hours) + 'h ' : '';
+  const formatedMins = addZeroLeft(minutes) + 'm ';
+  const formatedSeconds = addZeroLeft(seconds % 60) + 's ';
 
   if (pattern == 'HMS') {
     return `${formatedHours}${formatedMins}${formatedSeconds}`;
