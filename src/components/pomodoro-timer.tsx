@@ -28,10 +28,13 @@ export function PomodoroTimer(props: Props) {
   const [cyclesQtdManager, setCyclesQtdManager] = React.useState(
     new Array(props.cycles - 1).fill(true),
   );
-
+  const pomodorosFromLS = window.localStorage.getItem('pomodoros') || '0';
+  const pomodoroStartingValue = parseInt(pomodorosFromLS);
   const [completedCycles, setCompletedCycles] = React.useState(0);
   const [fullWorkingTime, setFullWorkingTime] = React.useState(0);
-  const [numberOfPomodoros, setNumberOfPomodoros] = React.useState(0);
+  const [numberOfPomodoros, setNumberOfPomodoros] = React.useState(
+    pomodoroStartingValue,
+  );
 
   useInterval(
     () => {
@@ -40,6 +43,16 @@ export function PomodoroTimer(props: Props) {
     },
     timeCounting ? 1000 : null,
   );
+
+  const syncLocalStorageValue = async (
+    callbackFunction: CallableFunction,
+    value: number,
+    LocalStorageKey: string,
+  ) => {
+    await callbackFunction(value);
+    const valueString = value.toString();
+    window.localStorage.setItem(LocalStorageKey, valueString);
+  };
 
   const configureWork = useCallback(() => {
     setTimeCounting(true);
@@ -98,7 +111,11 @@ export function PomodoroTimer(props: Props) {
       setCompletedCycles(completedCycles + 1);
     }
     if (working) {
-      setNumberOfPomodoros(numberOfPomodoros + 1);
+      syncLocalStorageValue(
+        setNumberOfPomodoros,
+        numberOfPomodoros + 1,
+        'pomodoros',
+      );
     }
     if (resting) configureWork();
   }, [working, resting, mainTime]);
