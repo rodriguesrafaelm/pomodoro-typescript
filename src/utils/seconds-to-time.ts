@@ -15,13 +15,8 @@ export function secondsToTime(
   const formatedMins = addZeroLeft(minutes) + 'm ';
   const formatedSeconds = addZeroLeft(seconds % 60) + 's ';
 
-  if (pattern == 'HMS') {
-    return `${formatedHours}${formatedMins}${formatedSeconds}`;
-  }
   if (pattern == 'HM') {
     return `${formatedHours}${formatedMins}`;
   }
-  throw new Error(
-    'Should declare a second argument for pattern "HMS" for hours:minutes:seconds or "HM" for hours:minutes',
-  );
+  return `${formatedHours}${formatedMins}${formatedSeconds}`;
 }
