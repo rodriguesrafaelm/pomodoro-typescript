@@ -1,4 +1,9 @@
-export function secondsToTime(totalSeconds: number, pattern: string): string {
+type timePattern = 'HMS' | 'HM';
+
+export function secondsToTime(
+  totalSeconds: number,
+  pattern: timePattern,
+): string {
   function addZeroLeft(value: number): string {
     return value.toString().padStart(2, '0');
   }
