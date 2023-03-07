@@ -44,12 +44,12 @@ export function PomodoroTimer(props: Props) {
     timeCounting ? 1000 : null,
   );
 
-  const syncLocalStorageValue = async (
+  const syncLocalStorageValue = (
     callbackFunction: CallableFunction,
     value: number,
     LocalStorageKey: string,
   ) => {
-    await callbackFunction(value);
+    callbackFunction(value);
     const valueString = value.toString();
     window.localStorage.setItem(LocalStorageKey, valueString);
   };
