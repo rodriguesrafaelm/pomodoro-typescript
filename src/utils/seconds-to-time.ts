@@ -20,3 +20,13 @@ export function secondsToTime(
   }
   return `${formatedHours}${formatedMins}${formatedSeconds}`;
 }
+
+export function syncLocalStorageValue(
+  callbackFunction: CallableFunction,
+  value: number,
+  LocalStorageKey: string,
+) {
+  callbackFunction(value);
+  const valueString = value.toString();
+  window.localStorage.setItem(LocalStorageKey, valueString);
+}

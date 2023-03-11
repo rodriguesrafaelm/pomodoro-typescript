@@ -7,7 +7,7 @@ import bellStart from '../sounds/src_sounds_bell-start.mp3';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import bellFinish from '../sounds/src_sounds_bell-finish.mp3';
 import clickSound from '../sounds/src_sounds_click.mp3';
-import { secondsToTime } from '../utils/seconds-to-time';
+import { secondsToTime, syncLocalStorageValue } from '../utils/seconds-to-time';
 
 const audioStartWorking = new Audio(bellStart);
 const audioStopWorking = new Audio(bellFinish);
@@ -43,16 +43,6 @@ export function PomodoroTimer(props: Props) {
     },
     timeCounting ? 1000 : null,
   );
-
-  const syncLocalStorageValue = (
-    callbackFunction: CallableFunction,
-    value: number,
-    LocalStorageKey: string,
-  ) => {
-    callbackFunction(value);
-    const valueString = value.toString();
-    window.localStorage.setItem(LocalStorageKey, valueString);
-  };
 
   const configureWork = useCallback(() => {
     setTimeCounting(true);
