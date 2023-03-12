@@ -2,16 +2,12 @@ import React, { useCallback, useEffect } from 'react';
 import { useInterval } from '../hooks/useInterval';
 import { Button } from './button';
 import { Timer } from './main-timer';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import bellStart from '../sounds/src_sounds_bell-start.mp3';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import bellFinish from '../sounds/src_sounds_bell-finish.mp3';
-import clickSound from '../sounds/src_sounds_click.mp3';
 import { secondsToTime, syncLocalStorageValue } from '../utils/seconds-to-time';
-
-const audioStartWorking = new Audio(bellStart);
-const audioStopWorking = new Audio(bellFinish);
-const audioClick = new Audio(clickSound);
+import {
+  audioClick,
+  audioStartWorking,
+  audioStopWorking,
+} from '../utils/sound-instances';
 
 interface Props {
   pomodoroTime: number;
