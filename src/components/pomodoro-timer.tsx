@@ -17,6 +17,8 @@ interface Props {
 }
 
 export function PomodoroTimer(props: Props) {
+  const pomodorosFromLS = window.localStorage.getItem('pomodoros') || '0';
+  const pomodoroStartingValue = parseInt(pomodorosFromLS);
   const [mainTime, setMainTime] = React.useState(props.pomodoroTime);
   const [timeCounting, setTimeCounting] = React.useState(false);
   const [working, setWorking] = React.useState(false);
@@ -24,8 +26,6 @@ export function PomodoroTimer(props: Props) {
   const [cyclesQtdManager, setCyclesQtdManager] = React.useState(
     new Array(props.cycles - 1).fill(true),
   );
-  const pomodorosFromLS = window.localStorage.getItem('pomodoros') || '0';
-  const pomodoroStartingValue = parseInt(pomodorosFromLS);
   const [completedCycles, setCompletedCycles] = React.useState(0);
   const [fullWorkingTime, setFullWorkingTime] = React.useState(0);
   const [numberOfPomodoros, setNumberOfPomodoros] = React.useState(
@@ -108,12 +108,14 @@ export function PomodoroTimer(props: Props) {
 
   return (
     <div className="pomodoro">
-      <h2>{working ? 'Foco' : 'Descanso'}</h2>
+      <h2>{working ? 'Focus' : 'Rest'}</h2>
       <Timer mainTimer={mainTime} />
-      <h2 className="pause-message">{timeCounting ? '' : 'Timer Parado'}</h2>
+      <h2 className="pause-message">
+        {fullWorkingTime && !timeCounting ? 'Paused' : ''}
+      </h2>
       <div className="controls">
         <Button
-          text="Iniciar"
+          text="Start"
           className={working ? 'hidden' : ''}
           onClick={() => configureWork()}
         />
@@ -122,12 +124,12 @@ export function PomodoroTimer(props: Props) {
           text={timeCounting ? 'II' : '▷'}
           onClick={() => pauseActions()}
         />
-        <Button text="↻" onClick={() => configureRest(false)} />
+        <Button text="Rest" onClick={() => configureRest(false)} />
       </div>
       <div className="details">
-        <p>Ciclos Completos: {completedCycles}</p>
-        <p>Tempo de trabalho: {secondsToTime(fullWorkingTime, 'HM')} </p>
-        <p>Pomodoros concluidos: {numberOfPomodoros}</p>
+        <p>Completed cycles: {completedCycles}</p>
+        <p>Working time: {secondsToTime(fullWorkingTime, 'HM')} </p>
+        <p>Pomodoros: {numberOfPomodoros}</p>
       </div>
     </div>
   );
