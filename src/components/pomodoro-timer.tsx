@@ -128,7 +128,7 @@ export function PomodoroTimer(props: Props) {
       </div>
       <div className="details">
         <p>Completed cycles: {completedCycles}</p>
-        <p>Working time: {secondsToTime(fullWorkingTime, 'HM')} </p>
+        <p>Working time: {secondsToTime(fullWorkingTime, 'HMS')} </p>
         <p>Pomodoros: {numberOfPomodoros}</p>
       </div>
     </div>
